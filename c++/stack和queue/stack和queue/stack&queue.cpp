@@ -30,10 +30,57 @@ void Test_2()
 	cout << st.size() << endl;
 }
 
+void Test_3()
+{
+	//测试优先级队列，这是从大到小,greater是从小到大排序
+	priority_queue<int, vector<int>/**greater<int>*/>pq;
+
+	pq.push(4);
+	pq.push(7);
+	pq.push(1);
+	pq.push(9);
+
+	while (!pq.empty())
+	{
+		cout << pq.top() << " ";
+		pq.pop();
+	}
+	cout << endl;
+}
+
+void Test_4()
+{
+	yamxxiao::priority_queue<int, vector<int>/**greater<int>*/>pq;
+
+	pq.push(4);
+	pq.push(7);
+	pq.push(1);
+	pq.push(9);
+
+	while (!pq.empty())
+	{
+		cout << pq.top() << " ";
+		pq.pop();
+	}
+	cout << endl;
+}
+
+void Test_5()
+{
+	lessfunc<int> less;
+	greaterfunc<int> greater;
+
+	cout << less(1, 2) << endl; 
+	int a[] = { 5,9,8,4,3,6,10,2 };
+	BubbleSort(a, sizeof(a) / sizeof(a[0]),less);
+}
 int main()
 {
 	/*Test_1();*/
-	Test_2();
+	/*Test_2();*/
+	/*Test_3();*/
 	/*cout << "hello world" << endl;*/
+	//Test_4();
+	Test_5();
 	return 0;
 }
