@@ -226,7 +226,7 @@ public:
 //>ÉıĞò
 //<½µĞò
 template<class Compare>
-void BubbleSort(int* a, int n,Compare com)
+void BubbleSort(int* a, int n,Compare com)//Ã°ÅİÅÅĞò
 {
 	for (int j = 0; j < n; j++)
 	{

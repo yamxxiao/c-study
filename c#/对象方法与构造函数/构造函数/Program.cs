@@ -9,7 +9,7 @@
             public int attack;
             public int def;
 
-            public int Hp { get; private set; }//属性
+            public int Hp;//属性
             //public int Hp
             //{
             //    get {
@@ -40,6 +40,7 @@
             character1.attack = 10;
             character1.def = 10;
             Console.WriteLine($"皮卡丘的生命值：{character1.hp}");
+
             character1.Hp = 80;
             Console.WriteLine($"皮卡丘的生命值：{character1.hp}");
             Character character2 = new Character();
