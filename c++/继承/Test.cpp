@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿#include"Test.h"
-=======
 #include"Test.h"
->>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
 
 int main()
 {
@@ -11,9 +7,10 @@ int main()
 
 	s1.identity();
 	t1.identity();*/
-
-<<<<<<< HEAD
 	/*yamx::Stack<int> s1;
+=======
+	yamx::Stack<int> s1;
+>>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
 =======
 	yamx::Stack<int> s1;
 >>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
@@ -27,6 +24,7 @@ int main()
 	{
 		cout << s1.top() << " ";
 		s1.pop();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	}*/
 	//派生类可以赋值给基类的指针和引用，基类不能赋值给派生类。
@@ -52,8 +50,3 @@ int main()
 
 	return 0;
 }
-=======
-	}
-	return 0;
-}
->>>>>>> e504793498c953af4f1a670ff1e3d6a317107999

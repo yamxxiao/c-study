@@ -80,7 +80,6 @@ namespace yamx
 		}
 	};
 	//父类是类模板时，需要指定一下，否则会报错
-<<<<<<< HEAD
 }
 
 namespace xiao
@@ -195,8 +194,77 @@ namespace Test
 
 	//子类的拷贝构造必须调用父类的拷贝构造完成父类的拷贝初始化
 
+//使用关键字final可以让类不被继承，友元关系不能被继承
 
-=======
+//虚继承
+namespace Test1
+{
+	class Person
+	{
+	public:
+		string _name; // 姓名
+		/*int _tel;
+	
+		int _age;
+		string _gender;
+		string _address;*/
+		// ...
+	};
+	// 使⽤虚继承Person类
+	class Student : virtual public Person
+	{
+	protected:
+		int _num; //学号
+	};
+	// 使⽤虚继承Person类
+	class Teacher : virtual public Person
+	{
+	protected:
+		int _id; // 职⼯编号
+	};
+	// 教授助理
+	class Assistant : public Student, public Teacher
+	{
+	protected:
+		string _majorCourse; // 主修课程
+	};
 
+	//如下：问p1，p2，p3的关系
+	class Base1
+	{
+	public:int _b1;
+	};
+
+	class Base2
+	{
+	public:
+		int _b2;
+	};
+
+	class Derive : public Base1, public Base2
+	{
+	public:
+		int _b3;
+	};
+
+	int main1()
+	{
+		Derive d;
+		Base1* p1 = &d;
+		Base2* p2 = &d;
+		Derive* p3 = &d;
+		//这里p1=p3！=p2；
+		//因为多继承的分布是按照声明的顺序的，先继承的先声明，所以，按照声明顺序，p1=p3!=p2
+	}
 }
->>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
+//继承和组合
+//继承：
+//class stack : public list
+//{
+//
+//};
+//组合：
+//class stack
+//{
+//	| list _it;
+//};
