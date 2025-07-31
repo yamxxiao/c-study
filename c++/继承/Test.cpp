@@ -1,4 +1,16 @@
+<<<<<<< HEAD
 #include"Test.h"
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+﻿#include"Test.h"
+=======
+#include"Test.h"
+>>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
+=======
+#include"Test.h"
+>>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
+>>>>>>> ef38d34a1f90dbf91016cc8a71ae385e2df49128
 
 int main()
 {
@@ -7,6 +19,12 @@ int main()
 
 	s1.identity();
 	t1.identity();*/
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ef38d34a1f90dbf91016cc8a71ae385e2df49128
 	/*yamx::Stack<int> s1;
 =======
 	yamx::Stack<int> s1;
@@ -49,4 +67,18 @@ int main()
 	Test::Student s2(s1);
 
 	return 0;
+<<<<<<< HEAD
 }
+=======
+}
+=======
+	}
+	return 0;
+}
+>>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
+=======
+	}
+	return 0;
+}
+>>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
+>>>>>>> ef38d34a1f90dbf91016cc8a71ae385e2df49128
