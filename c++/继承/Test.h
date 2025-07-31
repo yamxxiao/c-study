@@ -80,6 +80,11 @@ namespace yamx
 		}
 	};
 	//父类是类模板时，需要指定一下，否则会报错
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ef38d34a1f90dbf91016cc8a71ae385e2df49128
 }
 
 namespace xiao
@@ -257,6 +262,7 @@ namespace Test1
 		//因为多继承的分布是按照声明的顺序的，先继承的先声明，所以，按照声明顺序，p1=p3!=p2
 	}
 }
+<<<<<<< HEAD
 //继承和组合
 //继承：
 //class stack : public list
@@ -268,3 +274,10 @@ namespace Test1
 //{
 //	| list _it;
 //};
+=======
+>>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
+=======
+
+}
+>>>>>>> e504793498c953af4f1a670ff1e3d6a317107999
+>>>>>>> ef38d34a1f90dbf91016cc8a71ae385e2df49128
