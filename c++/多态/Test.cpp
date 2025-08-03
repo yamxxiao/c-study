@@ -110,11 +110,16 @@ int main()
 	//B* p = new B;
 
 	//p->test();
+<<<<<<< HEAD
 	/*Person ps;
+=======
+	Person ps;
+>>>>>>> 16d8723c74d4a38e03e0969413edf876bb795443
 	Student st;
 	Soldier sr;
 	Func(&ps);
 	Func(&st);
+<<<<<<< HEAD
 	Func(&sr);*/
 
 	// 其次多态不仅仅发⽣在派⽣类对象之间，多个派⽣类继承基类，重写虚函数后
@@ -161,5 +166,11 @@ int main()
 		else cout << "false" << endl;
 
 
+=======
+	Func(&sr);
+
+	// 其次多态不仅仅发⽣在派⽣类对象之间，多个派⽣类继承基类，重写虚函数后
+	// 多态也会发⽣在多个派⽣类之间。
+>>>>>>> 16d8723c74d4a38e03e0969413edf876bb795443
 	return 0;
 }
