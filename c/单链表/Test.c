@@ -21,7 +21,7 @@ int main()
 	Push_Back(&Node5,5);
 	Print(Node5);*/
 
-	STLNode* node5=NULL;
+	STLNode* node5 = NULL;
 	Push_Front(&node5, 1);
 	Push_Front(&node5, 2);
 	Push_Front(&node5, 3);
@@ -29,9 +29,24 @@ int main()
 	Push_Front(&node5, 5);
 	Push_Front(&node5, 6);
 	Pop_Back(&node5);
+	//Print(node5);
+	//Erase(&node5, 1);
 	Print(node5);
-	Pop_Front(&node5);
-	Print(node5);
+	//Pop_Front(&node5);
+	//InsertAther(3, 9);
+	//Print(node5);
+	//STLNode* find = Find(&node5, 2);
+	//Print(node5);
+
+	//if (find > 0)
+	//{
+	//	printf("找到了\n");
+	//}
+	//else
+	//{
+	//	printf("没有找到\n");
+	//}
+
 
 	return 0;
 }
