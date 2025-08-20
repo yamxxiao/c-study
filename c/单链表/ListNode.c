@@ -113,3 +113,96 @@ void Pop_Front(STLNode** phead)
 		*phead = pail;
 	}
 }
+
+STLNode* Find(STLNode* phead, SLDataType x)
+{
+	STLNode* pucr = phead;
+
+	while (pucr)
+	{
+		if (pucr->data == x)
+		{
+			return pucr;
+		}
+		pucr = pucr->next;
+	}
+	return NULL;
+}
+
+
+void Insert(STLNode** phead, STLNode* pos, SLDataType x)
+{
+	assert(phead && *phead);
+	assert(pos);
+	STLNode* NewNode = SLTBuyNode(x);
+	if (pos == *phead)
+	{
+		Push_Front(phead, x);
+	}
+	else
+	{
+		STLNode* perv = *phead;
+		while (perv->next != pos)
+		{
+			perv = perv->next;
+		}
+		NewNode->next = pos;
+		perv->next = NewNode;
+	}
+}
+
+void InsertAther(STLNode* pos, SLDataType x)//因为实在之后插入所以不需要考虑头结点为空的情况
+{
+	assert(pos);
+	STLNode* NewNode = SLTBuyNode(x);
+
+	STLNode* _next = pos->next;
+
+	/*NewNode->next = pos->next;*/
+	NewNode->next = _next;
+	pos->next = NewNode;
+}
+
+void Erase(STLNode**phead,STLNode* pos)
+{
+	assert(phead && *phead);
+	assert(pos);
+
+	if (pos == *phead)
+	{
+		Pop_Front(pos);
+	}
+	else
+	{
+		STLNode* prev = *phead;
+
+		while (prev->next != pos)
+		{
+			prev = prev->next;
+		}
+		prev->next = pos->next;
+		free(pos);
+		pos = NULL;
+	}
+}
+
+void EraseAther(STLNode* pos)//无需考虑头结点
+{
+	assert(pos&& pos->next);
+	STLNode* tail = pos->next;
+	pos->next = pos->next->next;
+	free(tail);
+}
+
+void Destroy(STLNode** phead)
+{
+	STLNode* pail = *phead;
+	
+	while (pail->next != NULL)
+	{
+		STLNode* next = pail->next;
+		free(pail);
+		pail =next;
+	}
+	*phead = NULL;
+}

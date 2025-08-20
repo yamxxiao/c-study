@@ -28,3 +28,19 @@ void Pop_Back(STLNode** phead);
 
 //头删
 void Pop_Front(STLNode** phead);
+
+//查找
+STLNode* Find(STLNode* phead, SLDataType x);
+
+//在pos位置之前插入
+void Insert(STLNode** phead, STLNode* pos, SLDataType x);
+
+//在pos位置之后插入
+void InsertAther(STLNode* pos, SLDataType x);
+
+//在pos位置之前删除
+void Erase(STLNode**phead,STLNode* pos);
+//在pos位置之后删除
+void EraseAther(STLNode* pos);
+//销毁
+void Destroy(STLNode* phead);
