@@ -16,7 +16,7 @@ int main()
   //  list.Print();
   //  SList<int> list1(list);
   //  list1.Print();
-	int cut = 0;
+/*	int cut = 0;
 	for (int i = 1; i <= 100; i++)
 	{
 		 if (i % 10 == 9 || i / 10 == 9)
@@ -28,6 +28,6 @@ int main()
 		 }
 		}
 	}
-	cout << cut << endl;
+	cout << cut << endl*/;
 	return 0;
 }
