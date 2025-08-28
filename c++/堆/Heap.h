@@ -73,7 +73,7 @@ public:
 		AdjustDown(size-1,0);
 	}
 	//È¡¸ù
-	T& HeapTop()
+	T HeapTop()
 	{
 		assert(size > 0);
 		return array[0];
