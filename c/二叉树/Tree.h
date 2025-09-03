@@ -3,6 +3,7 @@
 #include"assert.h"
 #include"stdlib.h"
 #include"stdbool.h"
+#include"math.h"
 
 typedef int BTDataType;
 typedef struct BinaryTreeNode
@@ -78,7 +79,7 @@ BTNode* CreateBTree(BTDataType data)
 	if (node == NULL)
 	{
 		printf("fail!\n");
-		return;
+		return NULL;
 	}
 	
 	node->val = data;
@@ -137,8 +138,9 @@ void PervOrder(BTree* tree)
 	{
 		return;
 	}
-	printf("前序遍历:\n");
+	printf("前序遍历:");
 	BTPervOrder(tree->root);
+	printf("\n");
 }
 void InOrder(BTree* tree)
 {
@@ -146,8 +148,9 @@ void InOrder(BTree* tree)
 	{
 		return;
 	}
-	printf("中序遍历:\n");
+	printf("中序遍历:");
 	BTInOrder(tree->root);
+	printf("\n");
 }
 void PostOrder(BTree* tree)
 {
@@ -155,8 +158,9 @@ void PostOrder(BTree* tree)
 	{
 		return;
 	}
-	printf("后序遍历:\n");
+	printf("后序遍历:");
 	BTPostOrder(tree->root);
+	printf("\n");
 }
 //插入树节点
 BTNode* InsertBTree(BTNode*root, BTDataType data)
@@ -165,6 +169,7 @@ BTNode* InsertBTree(BTNode*root, BTDataType data)
 	if (root == NULL)
 	{
 		root = CreateBTree(data);
+		return root;
 	}
 	else
 	{
@@ -223,4 +228,61 @@ BTNode* InsertBTree(BTNode*root, BTDataType data)
 void Insert(BTree* tree, BTDataType data)
 {
 	tree->root = InsertBTree(tree->root, data);
+}
+
+//求高度个数
+int BTreeHeight(BTNode* root)
+{
+	if (root == NULL)
+	{
+		return 0;
+	}
+	return fmax(BTreeHeight(root->left), BTreeHeight(root->right)) + 1;
+}
+
+//求叶子结点个数
+int BTreeLeafSize(BTNode* root)
+{
+	if (root == NULL)
+	{
+		return 0;
+	}
+
+	if (root->left == NULL && root->right == NULL)
+	{
+		return 1;
+	}
+
+	return BTreeLeafSize(root->left) + BTreeLeafSize(root->right);
+}
+
+//求总节点总数
+int BTreeSize(BTNode* root)
+{
+	if (root == NULL)
+	{
+		return 0;
+	}
+
+	return BTreeSize(root->left) + BTreeSize(root->right) + 1;
+}
+
+//求二叉树k节点的值
+
+BTNode* TreeFind(BTNode* root, BTDataType x)
+{
+	if (root == NULL)
+	{
+		return NULL;
+	}
+
+	if (root->val == x)
+	{
+		return root;
+	}
+	BTNode* rte1 = TreeFind(root->left, x);
+	return rte1;
+
+	BTNode* rte2 = TreeFind(root->right, x);
+	return rte2;
 }
