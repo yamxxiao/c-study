@@ -19,5 +19,6 @@ int main()
 	printf("树的高度：%d\n", BTreeHeight(tree->root));
 	printf("树的叶子节点个数：%d\n", BTreeLeafSize(tree->root));
 	printf("树的总结点数：%d\n", BTreeSize(tree->root));
+	BTreeDestroy(tree->root);
 	return 0;
 }

@@ -1,5 +1,6 @@
  #pragma once
 #include<iostream>
+#include<queue>
 
 using namespace std;
 
@@ -139,8 +140,52 @@ public:
 		cout << "∫Û–Ú±È¿˙:" << endl;
 		Perv_PostOrder(root);
 	}
+
+	void clear(TreeNode<T>* root)
+	{
+		if (root == nullptr)
+		{
+			return;
+		}
+
+		clear(root->left);
+		clear(root->right);
+		delete root;
+
+	}
+
+	~Tree()
+	{
+		clear(root);
+	}
+	
+	//≤„–Ú±È¿˙
+	void BFS(TreeNode<T>& root)
+	{
+		queue<T> tree;
+		tree.push(root);
+		int levelSize = tree.size();
+		while (tree != empty())
+		{
+			for (int i = 0; i < levelSize; i++)
+			{
+				TreeNode<T>* current = tree.front();
+				tree.pop();
+				cout << current->val << " ";
+
+				if (current->left != nullptr)
+				{
+					tree.push(current->left);
+				}
+				if (current->right != nullptr)
+				{
+					tree.push(current->right);
+				}
+			}
+			cout << endl;
+		}
+	}
 private:
 
 	TreeNode<T>* root;
 };
-
