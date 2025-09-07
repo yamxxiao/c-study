@@ -286,3 +286,15 @@ BTNode* TreeFind(BTNode* root, BTDataType x)
 	BTNode* rte2 = TreeFind(root->right, x);
 	return rte2;
 }
+
+void BTreeDestroy(BTNode* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+
+	BTreeDestroy(root->left);
+	BTreeDestroy(root->right);
+	free(root);
+}
