@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include"Stack.h"
 
 //插入排序
 void InsertSort(int* arr, int n)
@@ -24,7 +24,7 @@ void InsertSort(int* arr, int n)
 		arr[end + 1] = temp;
 	}
 }
-void Print(int *arr,int n)
+void PrintSort(int *arr,int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -212,6 +212,162 @@ void SelectSort_shuang(int* arr, int size)
 		right--;
 	}
 }
+//三数取中
+int medianOfThree(int* arr, int left, int right)
+{
+	int mind = left + (right - left) / 2;
+	//确保arr[left]<arr[mind]<arr[right]
+	if (arr[left] > arr[mind])
+	{
+		Swap(&arr[left], &arr[mind]);
+	}
+	if (arr[left] > arr[right])
+	{
+		Swap(&arr[left], &arr[right]);
+	}
+	if (arr[mind] > arr[right])
+	{
+		Swap(&arr[mind], &arr[right]);
+	}
+
+	//将中值放入right-1的位置作为基准
+	Swap(&arr[mind], &arr[right - 1]);
+
+	return arr[right - 1];
+}
+
+//分区函数
+int partition(int* arr, int left, int right)
+{
+	//使用三数取中法，选择基准
+	int pivot = medianOfThree(arr, left, right);
+
+	int i = left;
+	int j = right - 1;
+
+	while (1)
+	{
+		//从左边向右找大于等于基准的元素
+		while (arr[i++] < pivot);
+
+		//从右向左找等于小于基准的元素
+		while (arr[j--] > pivot);
+
+		if (i < j)
+		{
+			Swap(&arr[i], &arr[j]);
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	//将基准放到正确的位置
+	Swap(&arr[i], &arr[right - 1]);
+	return i;
+}
+//快排
+void QQQquickSort(int *arr,int left,int right)
+{
+	if (left < right)
+	{
+		//当子数组的长度大于3时使用快排
+		if (right - left > 3)
+		{
+			int pi = partition(arr, left, right);
+			QQQquickSort(arr, left, pi - 1);
+			QQQquickSort(arr, pi + 1, right);
+		}
+		else
+		{
+			//对于小于数组，使用插入排序
+
+			if (right - left == 1)
+			{
+				if (arr[left] > arr[right])
+				{
+					Swap(&arr[left], &arr[right]);
+				}
+			}
+			else if (right - left == 2)
+			{
+				if (arr[left] > arr[left + 1])
+				{
+					Swap(&arr[left], &arr[left + 1]);
+				}
+
+				if (arr[left + 1] > arr[right])
+				{
+					Swap(&arr[left + 1], &arr[right]);
+				}
+
+				if (arr[left] > arr[left + 1])
+				{
+					Swap(&arr[left], &arr[left + 1]);
+				}
+			}
+		}
+	}
+}
+
+//前后指针
+int quickSort2(int* arr, int left, int right)
+{
+	//三数取中
+	int Getmind = medianOfThree(arr, left, right);
+	Swap(&arr[left], &arr[Getmind]);
+	int keyi = left;
+	int perv = keyi;
+	int cur = perv + 1;
+
+	while (cur <= right)
+	{
+		if (arr[cur] < arr[keyi]&&++perv!=cur)
+		{
+			Swap(&arr[perv], &arr[cur]);
+		}
+		cur++;
+	}
+	Swap(&arr[perv], &arr[keyi]);
+	return perv;
+}
+
+//快排非递归，使用栈实现
+void quickSortNoneR(int* arr,int left,int right)
+{
+	ST st;
+	STInit(&st);
+	STPush(&st, left);
+	STPush(&st, right);
+	
+	while (!STEmpty(&st))
+	{
+		int begin = top(&st);
+		STPop(&st);
+		int end = top(&st);
+		STPop(&st);
+
+		int keyi = partition(arr, left, right);
+
+		//分区间调整
+		if (keyi + 1 < end)
+		{
+			STPush(&st, keyi + 1);
+			STPush(&st, end);
+		}
+
+		if (begin < keyi - 1)
+		{
+			STPush(&st, begin);
+			STPush(&st, keyi - 1);
+		}
+	}
+}
+
+//归并排序
+void _megmceSort()
+{
 
 int main()
 {
@@ -219,13 +375,14 @@ int main()
 	int arr[] = {14,74,2,34,55,24,74,11,8,9,5,6};
 	int n = sizeof(arr) / sizeof(arr[0]);
 	/*InsertSort(arr, n);
-	Print(arr,n);*/
+	/*Print(arr,n);*/
 	/*HeapSort(arr, n);
-	Print(arr, n);*/
+	/*Print(arr, n);*/
 	/*ShellSort(arr, n);
-	Print(arr, n);*/
-	SelectSort_shuang(arr, n);
-	Print(arr, n);
+	//Print(arr, n);*/
+	/*SelectSort_shuang(arr, n);*/
+	/*QQQquickSort(arr, 0,n - 1);
+	/*PrintSort(arr, n);*/
 
 	return 0;
 }
