@@ -212,7 +212,47 @@ void SelectSort_shuang(int* arr, int size)
 		right--;
 	}
 }
-//三数取中
+//简单实现快排
+void _simpleQuickSort(int* arr, int left, int right)
+{
+	if (left >= right)
+	{
+		return;
+	}
+	int keyi = left;
+	int begin = left, end = right;
+
+	//先进去单次循环，指定一个keyi值，让keyi值左边的都比它小，右边的都比它大，然后将keyi值放在中间位置作为分界线
+	while (begin < end)
+	{
+		//这里进入条件循环，如果在左边找到了比keyi大的，右边找到了比keyi小的，则不进入循环，则是进行交换
+		//右边找最小 
+	// 先从右向左找第一个小于基准的元素
+		while (begin < end && arr[end] >= arr[keyi])
+		{
+			end--;
+		}
+
+		// 再从左向右找第一个大于基准的元素
+		while (begin < end && arr[begin] <= arr[keyi])
+		{
+			begin++;
+		}
+
+		Swap(&arr[begin], &arr[end]);
+	}
+	//跳出循环后，交换keyi值
+	Swap(&arr[keyi], &arr[begin]);
+	keyi = begin;
+
+	//再进入递归，对分隔好的两个区间进行排序
+	//分割的区间为[begin,keyi-1],key,[keyi+1,end]
+	_simpleQuickSort(arr, left, keyi - 1);
+	_simpleQuickSort(arr, keyi + 1, right);
+
+}
+
+//三数取中1
 int medianOfThree(int* arr, int left, int right)
 {
 	int mind = left + (right - left) / 2;
@@ -236,6 +276,42 @@ int medianOfThree(int* arr, int left, int right)
 	return arr[right - 1];
 }
 
+//三数取中2
+int Getmind(int* arr, int left, int right)
+{
+	int mind = (left + right) / 2;
+
+	if (arr[left] < arr[mind])
+	{
+		if (arr[left] > arr[right])
+		{
+			return left;
+		}
+		else if (arr[left] < arr[right])
+		{
+			return right;
+		}
+		else if(arr[right]<arr[mind])
+		{
+			return mind;
+		}
+	}
+	else//arr[left]>arr[mind]
+	{
+		if (arr[left] < arr[right])
+		{
+			return left;
+		}
+		else if (arr[left] > arr[right])
+		{
+			return right;
+		}
+		else if(arr[right]>arr[mind])
+		{
+			return mind;
+		}
+	}
+}
 //分区函数
 int partition(int* arr, int left, int right)
 {
@@ -270,45 +346,88 @@ int partition(int* arr, int left, int right)
 //快排
 void QQQquickSort(int *arr,int left,int right)
 {
-	if (left < right)
+	if (left >= right)
 	{
-		//当子数组的长度大于3时使用快排
-		if (right - left > 3)
-		{
-			int pi = partition(arr, left, right);
-			QQQquickSort(arr, left, pi - 1);
-			QQQquickSort(arr, pi + 1, right);
-		}
-		else
-		{
-			//对于小于数组，使用插入排序
-
-			if (right - left == 1)
-			{
-				if (arr[left] > arr[right])
-				{
-					Swap(&arr[left], &arr[right]);
-				}
-			}
-			else if (right - left == 2)
-			{
-				if (arr[left] > arr[left + 1])
-				{
-					Swap(&arr[left], &arr[left + 1]);
-				}
-
-				if (arr[left + 1] > arr[right])
-				{
-					Swap(&arr[left + 1], &arr[right]);
-				}
-
-				if (arr[left] > arr[left + 1])
-				{
-					Swap(&arr[left], &arr[left + 1]);
-				}
-			}
-		}
+		return;
 	}
+	int mind = Getmind(arr, left, right);
+	Swap(&arr[left], &arr[mind]);
+	int keyi = left;
+	int begin = left, end = right;
+
+	//小区间优化,用选择排序
+	if (right - left + 1 < 10)
+	{
+		InsertSort(arr + left, right - left + 1);
+	}
+	//先进去单次循环，指定一个keyi值，让keyi值左边的都比它小，右边的都比它大，然后将keyi值放在中间位置作为分界线
+	while (begin < end)
+	{
+		//这里进入条件循环，如果在左边找到了比keyi大的，右边找到了比keyi小的，则不进入循环，则是进行交换
+		//右边找最小 
+	// 先从右向左找第一个小于基准的元素
+		while (begin < end && arr[end] >= arr[keyi])
+		{
+			end--;
+		}
+
+		// 再从左向右找第一个大于基准的元素
+		while (begin < end && arr[begin] <= arr[keyi])
+		{
+			begin++;
+		}
+
+		Swap(&arr[begin], &arr[end]);
+	}
+	//跳出循环后，交换keyi值
+	Swap(&arr[keyi], &arr[begin]);
+	keyi = begin;
+
+	//再进入递归，对分隔好的两个区间进行排序
+	//分割的区间为[begin,keyi-1],key,[keyi+1,end]
+	QQQquickSort(arr, left, keyi - 1);
+	QQQquickSort(arr, keyi + 1, right);
+
+
+	//if (left < right)
+	//{
+	//	//当子数组的长度大于3时使用快排
+	//	if (right - left > 3)
+	//	{
+	//		int pi = partition(arr, left, right);
+	//		QQQquickSort(arr, left, pi - 1);
+	//		QQQquickSort(arr, pi + 1, right);
+	//	}
+	//	else
+	//	{
+	//		//对于小于数组，使用插入排序
+
+	//		if (right - left == 1)
+	//		{
+	//			if (arr[left] > arr[right])
+	//			{
+	//				Swap(&arr[left], &arr[right]);
+	//			}
+	//		}
+	//		else if (right - left == 2)
+	//		{
+	//			if (arr[left] > arr[left + 1])
+	//			{
+	//				Swap(&arr[left], &arr[left + 1]);
+	//			}
+
+	//			if (arr[left + 1] > arr[right])
+	//			{
+	//				Swap(&arr[left + 1], &arr[right]);
+	//			}
+
+	//			if (arr[left] > arr[left + 1])
+	//			{
+	//				Swap(&arr[left], &arr[left + 1]);
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 //前后指针
@@ -334,45 +453,47 @@ int quickSort2(int* arr, int left, int right)
 }
 
 //快排非递归，使用栈实现
-void quickSortNoneR(int* arr,int left,int right)
-{
-	ST st;
-	STInit(&st);
-	STPush(&st, left);
-	STPush(&st, right);
-	
-	while (!STEmpty(&st))
-	{
-		int begin = top(&st);
-		STPop(&st);
-		int end = top(&st);
-		STPop(&st);
-
-		int keyi = partition(arr, left, right);
-
-		//分区间调整
-		if (keyi + 1 < end)
-		{
-			STPush(&st, keyi + 1);
-			STPush(&st, end);
-		}
-
-		if (begin < keyi - 1)
-		{
-			STPush(&st, begin);
-			STPush(&st, keyi - 1);
-		}
-	}
-}
+//void quickSortNoneR(int* arr,int left,int right)
+//{
+//	ST st;
+//	STInit(&st);
+//	STPush(&st, left);
+//	STPush(&st, right);
+//	
+//	while (!STEmpty(&st))
+//	{
+//		int begin = top(&st);
+//		STPop(&st);
+//		int end = top(&st);
+//		STPop(&st);
+//
+//		int keyi = partition(arr, left, right);
+//
+//		//分区间调整
+//		if (keyi + 1 < end)
+//		{
+//			STPush(&st, keyi + 1);
+//			STPush(&st, end);
+//		}
+//
+//		if (begin < keyi - 1)
+//		{
+//			STPush(&st, begin);
+//			STPush(&st, keyi - 1);
+//		}
+//	}
+//}
 
 //归并排序
 void _megmceSort()
 {
 
+}
+
 int main()
 {
 
-	int arr[] = {14,74,2,34,55,24,74,11,8,9,5,6};
+	int arr[] = { 2,1,3,5,4,6,9,7,10,8 };
 	int n = sizeof(arr) / sizeof(arr[0]);
 	/*InsertSort(arr, n);
 	/*Print(arr,n);*/
@@ -383,6 +504,9 @@ int main()
 	/*SelectSort_shuang(arr, n);*/
 	/*QQQquickSort(arr, 0,n - 1);
 	/*PrintSort(arr, n);*/
+	_simpleQuickSort(arr, 0, n - 1);
+	/*InsertSort(arr,n);*/
+	PrintSort(arr,n);
 
 	return 0;
 }
